@@ -10,6 +10,7 @@
     scroll-behavior: smooth;
     font-family: 'Poppins',sans-serif;
 }
+
 :root
 {
     --bg-color:#000000;
@@ -51,6 +52,7 @@ section
     align-items: center;
     z-index: 100;
     background-color: #1b1b1b;
+    /*margin: 7px width:99%*/
 
 }
 .nav-link.active {
@@ -273,11 +275,14 @@ span
 .project-box img
 {
     width: 100%;
+    height: 300px;
     transition: .5s ease;
+    transform: scale(1.1);
 }
 .project-box:hover img
 {
-    transform: scale(1.1);
+    transform: scale(1.2);
+    border-radius: 25px;
 }
 .project-box .project-layer
 {
@@ -293,13 +298,13 @@ span
     flex-direction: column;
     text-align: center;
     padding: 0 4rem;
-    transform: translateY(100%);
+    transform: translateX(100%);
     transition: .5s ease;
 
 }
 .project-box:hover .project-layer
 {
-    transform: translateY(0);
+    transform: translateX(0);
 }
 .project-layer h4
 {
@@ -417,12 +422,29 @@ span
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     gap: 2.5rem;
+    position: relative;
+    overflow: hidden;
 }
+.project-slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.project-slider .project-box {
+    flex: 0 0 auto;
+    width: 105%; /* Adjust width as needed */
+    padding: 10px 15px;
+
+
+     /* Adjust spacing between slides */
+}
+
 
 /* Add a media query for smaller screens */
 @media (max-width: 768px) {
     .project-container {
-        display: block; /* Change display property to stack vertically */
+        display: block;
+         /* Change display property to stack vertically */
     }
 
     .project-container .project-box {
@@ -595,6 +617,11 @@ span
 }
 
 /* Keep your existing CSS for desktop view */
+
+
+
+
+
 
 /* Add a media query for screens with a maximum width of 768px (mobile view) */
 @media (max-width: 768px) {
