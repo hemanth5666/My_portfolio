@@ -11,8 +11,23 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <!--Stylesheet Linking-->
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden; /* Disable horizontal scrolling */
+            scroll-behavior: smooth;
+        }
+
+        #starsCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
+    <canvas id="starsCanvas"></canvas>
     <!--Header design-->
     <header class="header">
         <a href="#home" class="logo">Portfolio</a>
@@ -127,7 +142,7 @@
                 </div>
                 <br>
                 <h3>Resume</h3>
-                <a href="RESUME1.pdf" download ><i class='bx bx-file'></i></a>
+                <a href="https://drive.google.com/drive/folders/1uRYBMtw21xPAg3G3H6e8I7-BfWDBBa76?usp=sharing" download ><i class='bx bx-file'></i></a>
             </div>
             
         </div>
@@ -136,37 +151,79 @@
     <section class="project" id="project">
         <h2 class="heading">Latest <span>Projects</span></h2>
         <div class="project-container">
-            <div class="project-box">
+            <div class="project-slider">
+
+            <div class="project-box" onclick="window.location.href='https://github.com/hemanth5666/Browser_Assistant'">
                 <img src="assistants.jpg" height="255px">
                 <div class="project-layer">
                     <h4>Browser Assistant</h4>
                     <p>Browser Assistant can perform a search in different engine using Speech Recognition, Text Recognition
                         </p>
-                    <a href="https://github.com/hemanth5666/Browser_Assistant" target="_blank"><i class='fa fa-share' style='color:#000000' ></i></a>
                 </div>
             </div>
 
-                <div class="project-box">
+                <div class="project-box" onclick="window.location.href='https://github.com/hemanth5666/Medicine_Describer'">
                     <img src="medicined.jpg" height="255px">
                     <div class="project-layer">
                         <h4>Medicine Describer</h4>
                         <p>Descriptions of different medications, their uses, benefits, and potential side effects
                             </p>
-                        <a href="https://github.com/hemanth5666/Medicine_Describer" target="_blank"><i class='fa fa-share' style='color:#000000' ></i></a>
                     </div>
                 </div>
 
-            <div class="project-box">
+            <div class="project-box" onclick="window.location.href='https://github.com/hemanth5666/DISEASE_PREDICTION_AND_MEDICAL_SUPPORT'">
                 <img src="mdisease.jpg" height="255px">
                 <div class="project-layer">
-                    <h4>Multi Disease Prediction(Current)</h4>
+                    <h4>Multi Disease Prediction</h4>
                     <p>Aspires to predict diseases in their early stages, facilitating prompt medical intervention and personalized treatment
                         </p>
-                    <a href="https://github.com/hemanth5666" target="_blank"><i class='fa fa-share' style='color:#000000' ></i></a>
                 </div>
             </div>
 
+            <div class="project-box" onclick="window.location.href='https://github.com/hemanth5666/Medicine_Describer'">
+                <img src="atm.jpg" height="255px">
+                <div class="project-layer">
+                    <h4>AI Virutal Keyboard</h4>
+                    <p>An AI virtual keyboard integrated with ATM systems for secure and convenient user input</p>
+                </div>
+            </div>
+
+
+            <div class="project-box" onclick="window.location.href='https://github.com/hemanth5666/BgRemover'">
+                <img src="bg.jpeg" height="255px">
+                <div class="project-layer">
+                    <h4>BgRemover</h4>
+                    <p>A multi-image background removal tool utilizing AI algorithms for simultaneous processing </p>
+                </div>
+            </div>
+
+            
+        <!--    
+            <div class="project-box" onclick="window.location.href='https://github.com/hemanth5666/DISEASE_PREDICTION_AND_MEDICAL_SUPPORT'">
+                <img src="mdisease.jpg" height="255px">
+                <div class="project-layer">
+                    <h4>Multi Disease Prediction</h4>
+                    <p>Aspires to predict diseases in their early stages, facilitating prompt medical intervention and personalized treatment
+                        </p>
+                </div>
+            </div>
+            <div class="project-box" onclick="window.location.href='https://github.com/hemanth5666/DISEASE_PREDICTION_AND_MEDICAL_SUPPORT'">
+                <img src="mdisease.jpg" height="255px">
+                <div class="project-layer">
+                    <h4>Multi Disease Prediction</h4>
+                    <p>Aspires to predict diseases in their early stages, facilitating prompt medical intervention and personalized treatment
+                        </p>
+                </div>
+            </div>
+
+        -->
+
+
+
         </div>
+
+
+    </div>
     
     </section>
     <!--Contact for Section-->
@@ -187,6 +244,7 @@
             <a href="#home" class="btn">Send Message</a>
         </form>
     </section>
+    <script src="javas.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const navLinks = document.querySelectorAll(".nav-link");
@@ -228,9 +286,47 @@
                 // Toggle the 'active' class on the navbar to show/hide it
                 navbar.classList.toggle('active');
             });
-        });
-        
-</script>
+        });  
+        </script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
+    <script>
+        let stars = [];
+        let canvas;
+
+        function setup() {
+            canvas = createCanvas(windowWidth, windowHeight);
+            canvas.position(0, 0);
+            canvas.style('z-index', '-1');
+            for (let i = 0; i < 100; i++) {
+                stars.push({
+                    x: random(width),
+                    y: random(height),
+                    size: random(1, 3),
+                    speed: random(1, 3)
+                });
+            }
+        }
+
+        function draw() {
+            background(0);
+            for (let i = 0; i < stars.length; i++) {
+                stroke(0, 255, 255); // Aqua color
+                strokeWeight(stars[i].size);
+                point(stars[i].x, stars[i].y);
+                stars[i].x -= stars[i].speed;
+                if (stars[i].x < 0) {
+                    stars[i].x = width;
+                    stars[i].y = random(height);
+                }
+            }
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+        }
+    </script>
+
 
 </body>
 </html>
